@@ -1,0 +1,105 @@
+# Git ignore configuration for Ouroboros AI Resilience Platform
+
+# Environment variables and secrets (NEVER COMMIT THESE!)
+config/gcp-project.env
+config/*.env
+.env
+.env.local
+.env.production
+*.key
+*.json.secret
+*-key.json
+
+# Google Cloud credentials
+*-service-account.json
+application_default_credentials.json
+gcloud/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+venv/
+env/
+ENV/
+.venv
+
+# Terraform
+infrastructure/terraform/.terraform/
+infrastructure/terraform/*.tfstate
+infrastructure/terraform/*.tfstate.*
+infrastructure/terraform/.terraform.lock.hcl
+infrastructure/terraform/crash.log
+infrastructure/terraform/override.tf
+infrastructure/terraform/override.tf.json
+infrastructure/terraform/*_override.tf
+infrastructure/terraform/*_override.tf.json
+
+# Node.js / Next.js (Dashboard)
+dashboard/node_modules/
+dashboard/.next/
+dashboard/out/
+dashboard/build/
+dashboard/.env*.local
+dashboard/npm-debug.log*
+dashboard/yarn-debug.log*
+dashboard/yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+coverage/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+
+# Kafka local data (if testing locally)
+kafka-data/
+zookeeper-data/
+
+# Datadog config with secrets
+config/datadog.yaml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation build artifacts
+docs/_build/
