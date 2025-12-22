@@ -160,19 +160,106 @@ export GCP_BILLING_ACCOUNT="XXXXXX-XXXXXX-XXXXXX"
 
 ---
 
-### Task 1.2: Enable Required GCP APIs
+### Task 1.2: Enable Required GCP APIs ✅
 
 **Objective**: Enable all necessary Google Cloud APIs for the platform
 
 **APIs to Enable**:
-- Vertex AI API (`aiplatform.googleapis.com`)
-- Cloud Functions API (`cloudfunctions.googleapis.com`)
-- Secret Manager API (`secretmanager.googleapis.com`)
-- Cloud Build API (`cloudbuild.googleapis.com`)
-- Cloud Resource Manager API (`cloudresourcemanager.googleapis.com`)
-- IAM API (`iam.googleapis.com`)
+- Vertex AI API (`aiplatform.googleapis.com`) - Agent runtime with Gemini models
+- Cloud Functions API (`cloudfunctions.googleapis.com`) - Autonomous remediation logic
+- Secret Manager API (`secretmanager.googleapis.com`) - Secure credential storage
+- Cloud Build API (`cloudbuild.googleapis.com`) - Function deployment pipeline
+- Cloud Resource Manager API (`cloudresourcemanager.googleapis.com`) - Project management
+- IAM API (`iam.googleapis.com`) - Service account management
+- Cloud Logging API (`logging.googleapis.com`) - Audit trails and debugging
+- Cloud Monitoring API (`monitoring.googleapis.com`) - Metrics collection
 
-**Steps**: See `infrastructure/gcp/enable-apis.sh` (Task 1.2)
+**Steps**:
+
+1. **Ensure environment variables are loaded**:
+   ```bash
+   source config/gcp-project.env
+   echo $GCP_PROJECT_ID  # Should display your project ID
+   ```
+
+2. **Run the API enablement script**:
+   ```bash
+   cd infrastructure/gcp
+   chmod +x enable-apis.sh
+   ./enable-apis.sh
+   ```
+
+   The script will:
+   - Verify project is active and billing is enabled
+   - Enable all 8 required APIs
+   - Verify critical APIs (Vertex AI, Cloud Functions, Secret Manager)
+   - Save API state to `config/apis-enabled.txt`
+   - Wait 30 seconds for API propagation
+
+3. **Verify APIs are enabled**:
+   ```bash
+   gcloud services list --enabled --filter="aiplatform OR cloudfunctions"
+   ```
+
+   Expected output should show:
+   ```
+   NAME                              TITLE
+   aiplatform.googleapis.com         Vertex AI API
+   cloudfunctions.googleapis.com     Cloud Functions API
+   secretmanager.googleapis.com      Secret Manager API
+   ...
+   ```
+
+4. **Test Vertex AI access**:
+   ```bash
+   gcloud ai models list --region=$GCP_REGION 2>&1 | head -5
+   ```
+
+   If successful, you should see model listings (or "Listed 0 items" if none deployed yet)
+
+**What Each API Does**:
+
+| API | Purpose in Ouroboros | Phase Used |
+|-----|---------------------|------------|
+| **Vertex AI** | Runs FinBot agent with Gemini 1.5 Pro, handles agent updates for remediation | Phase 2, 3 |
+| **Cloud Functions** | Hosts `inject-antidote` and `circuit-breaker` serverless functions | Phase 3 |
+| **Secret Manager** | Stores Datadog API keys, Kafka credentials securely (no .env files!) | Phase 1-5 |
+| **Cloud Build** | Builds and deploys Cloud Functions from source code | Phase 3 |
+| **IAM** | Creates service accounts with least-privilege permissions | Phase 1 |
+| **Logging** | Captures function execution logs, agent traces | Phase 2-5 |
+| **Monitoring** | Collects metrics for cost tracking and performance | Phase 4-5 |
+
+**Troubleshooting**:
+
+- **Error: "Billing is not enabled on this project"**
+  - Solution: Complete Task 1.1 first or run `gcloud billing projects link $GCP_PROJECT_ID --billing-account=YOUR_BILLING_ACCOUNT`
+
+- **Error: "User does not have permission to enable APIs"**
+  - Solution: You need `serviceusage.services.enable` permission
+  - Ask project owner to grant you `roles/serviceusage.serviceUsageAdmin`
+
+- **Error: "API enablement failed for aiplatform.googleapis.com"**
+  - Solution: Check quota limits in [Quotas page](https://console.cloud.google.com/iam-admin/quotas)
+  - Some organizations restrict Vertex AI access - contact admin
+
+- **Warning: "API may take time to propagate"**
+  - This is normal! The script waits 30 seconds automatically
+  - If issues persist, wait 2-3 minutes before proceeding
+
+**Success Criteria**:
+- ✅ All 8 APIs enabled without errors
+- ✅ Critical APIs verified (Vertex AI, Cloud Functions, Secret Manager)
+- ✅ API state saved to `config/apis-enabled.txt`
+- ✅ `gcloud services list --enabled` shows all required APIs
+
+**Cost Impact**:
+- **API enablement**: $0 (free to enable)
+- **API usage**: Billed separately in later phases
+  - Vertex AI: ~$20-50 for hackathon
+  - Cloud Functions: ~$5-10
+  - Other APIs: Minimal (<$1)
+
+**Estimated Time**: 5-10 minutes (including propagation wait)
 
 ---
 
