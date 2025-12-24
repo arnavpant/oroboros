@@ -103,3 +103,7 @@ Thumbs.db
 
 # Documentation build artifacts
 docs/_build/
+
+# Service account keys (NEVER commit these!)
+config/keys/
+*.json

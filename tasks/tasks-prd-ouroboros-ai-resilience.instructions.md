@@ -181,7 +181,7 @@ applyTo: "**"
 - [ ] 1.0 **Phase 1: Infrastructure Foundation & GCP Setup (Hours 0-48)**
   - [x] 1.1 Create Google Cloud Project and enable billing
   - [x] 1.2 Enable required GCP APIs (Vertex AI, Cloud Functions, Secret Manager, Cloud Build)
-  - [ ] 1.3 Create service accounts with appropriate IAM roles
+  - [x] 1.3 Create service accounts with appropriate IAM roles
   - [ ] 1.4 Set up Datadog organization and obtain API/App keys
   - [ ] 1.5 Configure Datadog-GCP integration for metric collection
   - [ ] 1.6 Set up Confluent Cloud Kafka cluster (free tier)
