@@ -23,8 +23,8 @@ echo -e "${CYAN}╚════════════════════�
 echo ""
 
 # Configuration variables
-PROJECT_ID="${PROJECT_ID:-ouroboros-ai-resilience-$(date +%s)}"
-PROJECT_NAME="${PROJECT_NAME:-Ouroboros AI Resilience Platform}"
+PROJECT_ID="${PROJECT_ID:-ouroboros-ai-$(date +%Y%m%d%H%M%S)}"
+PROJECT_NAME="${PROJECT_NAME:-Ouroboros AI}"
 REGION="${REGION:-us-central1}"
 ZONE="${ZONE:-us-central1-a}"
 
@@ -133,7 +133,7 @@ CONFIG_FILE="../../config/gcp-project.env"
 echo ""
 echo -e "${CYAN}💾 Saving configuration to $CONFIG_FILE${NC}"
 
-cat > "$CONFIG_FILE" << EOF
+cat > "$CONFIG_FILE" <<EOF
 # Ouroboros GCP Project Configuration
 # Generated on: $(date)
 
