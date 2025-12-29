@@ -103,3 +103,4 @@ Thumbs.db
 
 # Documentation build artifacts
 docs/_build/
+config/.env
