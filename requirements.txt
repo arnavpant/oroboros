@@ -1,0 +1,5 @@
+google-cloud-aiplatform>=1.38.0
+ddtrace>=2.0.0
+confluent-kafka>=2.3.0
+flask>=3.0.0
+protobuf>=4.25.0

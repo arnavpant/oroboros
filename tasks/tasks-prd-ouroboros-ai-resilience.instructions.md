@@ -178,57 +178,61 @@ applyTo: "**"
 
 ## Tasks
 
+
 - [ ] 1.0 **Phase 1: Infrastructure Foundation & GCP Setup (Hours 0-48)**
   - [x] 1.1 Create Google Cloud Project and enable billing
   - [x] 1.2 Enable required GCP APIs (Vertex AI, Cloud Functions, Secret Manager, Cloud Build)
-  - [ ] 1.3 Create service accounts with appropriate IAM roles
-  - [ ] 1.4 Set up Datadog organization and obtain API/App keys
+  - [x] 1.3 Create service accounts with appropriate IAM roles
+  - [x] 1.4 Set up Datadog organization and obtain API/App keys
   - [ ] 1.5 Configure Datadog-GCP integration for metric collection
   - [ ] 1.6 Set up Confluent Cloud Kafka cluster (free tier)
   - [ ] 1.7 Create Kafka topics: `agent.thoughts.v1` and `agent.remediations.v1`
   - [ ] 1.8 Define Avro schemas for Kafka topics in Schema Registry
-  - [ ] 1.9 Create project directory structure and initialize Git repository
-  - [ ] 1.10 Set up environment variables and configuration files
+  - [x] 1.9 Create project directory structure and initialize Git repository
+  - [x] 1.10 Set up environment variables and configuration files
   - [ ] 1.11 Install Python dependencies and verify local development environment
   - [ ] 1.12 Write infrastructure-as-code (Terraform) for reproducible deployment
 
+
 - [ ] 2.0 **Phase 2: FinBot Test Agent Development & Observability Integration (Hours 49-96)**
-  - [ ] 2.1 Design FinBot agent architecture (Planner, Researcher, Analyst pattern)
-  - [ ] 2.2 Implement FinBot agent using Vertex AI Agent Builder Python SDK
-  - [ ] 2.3 Create custom tools for FinBot (market data query, portfolio analysis)
-  - [ ] 2.4 Write system instructions for each agent role
-  - [ ] 2.5 Develop the "Poison Prompt" that triggers circular dependencies
-  - [ ] 2.6 Integrate Datadog LLM Observability SDK (`ddtrace`) into agent code
-  - [ ] 2.7 Configure trace capture for all agent interactions (input, output, tokens, latency)
-  - [ ] 2.8 Add custom trace tags: `agent_id`, `session_id`, `user_query`
-  - [ ] 2.9 Implement semantic loop detection logic using vector embeddings
-  - [ ] 2.10 Build token velocity monitoring with rolling averages
-  - [ ] 2.11 Create cost tracking module with real-time calculation
+  - [x] 2.1 Design FinBot agent architecture (Planner, Researcher, Analyst pattern)
+  - [x] 2.2 Implement FinBot agent using Vertex AI Agent Builder Python SDK
+  - [x] 2.3 Create custom tools for FinBot (market data query, portfolio analysis)
+  - [x] 2.4 Write system instructions for each agent role
+  - [x] 2.5 Develop the "Poison Prompt" that triggers circular dependencies
+  - [x] 2.6 Integrate Datadog LLM Observability SDK (`ddtrace`) into agent code
+  - [x] 2.7 Configure trace capture for all agent interactions (input, output, tokens, latency)
+  - [x] 2.8 Add custom trace tags: `agent_id`, `session_id`, `user_query`
+  - [x] 2.9 Implement semantic loop detection logic using vector embeddings
+  - [x] 2.10 Build token velocity monitoring with rolling averages
+  - [x] 2.11 Create cost tracking module with real-time calculation
   - [ ] 2.12 Deploy FinBot to Vertex AI and verify basic functionality
-  - [ ] 2.13 Test Poison Prompt and measure baseline failure metrics (time-to-failure, token burn rate)
+  - [x] 2.13 Test Poison Prompt and measure baseline failure metrics (time-to-failure, token burn rate)
   - [ ] 2.14 Verify traces appear in Datadog LLM Observability dashboard
 
+
 - [ ] 3.0 **Phase 3: Autonomous Remediation System (The Antidote) (Hours 97-120)**
-  - [ ] 3.1 Design Cloud Function architecture for remediation workflows
-  - [ ] 3.2 Implement `inject-antidote` Cloud Function (HTTP trigger)
-  - [ ] 3.3 Write logic to call Vertex AI `AgentServiceClient.update_agent()` with FieldMask
-  - [ ] 3.4 Create the "Antidote" system instruction override text
+  - [x] 3.1 Design Cloud Function architecture for remediation workflows
+  - [x] 3.2 Implement `inject-antidote` Cloud Function (HTTP trigger)
+  - [x] 3.3 Write logic to call Vertex AI `AgentServiceClient.update_agent()` with FieldMask
+  - [x] 3.4 Create the "Antidote" system instruction override text
   - [ ] 3.5 Implement verification logic to check for `TERMINATE_LOOP` output
-  - [ ] 3.6 Implement `circuit-breaker` Cloud Function for agent suspension
-  - [ ] 3.7 Add logic to update agent status to "SUSPENDED - Loop Detected"
-  - [ ] 3.8 Implement cooldown and auto-restart logic (30-second delay)
-  - [ ] 3.9 Build shared Vertex AI client library for Cloud Functions
+  - [x] 3.6 Implement `circuit-breaker` Cloud Function for agent suspension
+  - [x] 3.7 Add logic to update agent status to "SUSPENDED - Loop Detected"
+  - [x] 3.8 Implement cooldown and auto-restart logic (30-second delay)
+  - [x] 3.9 Build shared Vertex AI client library for Cloud Functions
   - [ ] 3.10 Deploy Cloud Functions to GCP with proper IAM permissions
   - [ ] 3.11 Test Cloud Functions locally using `curl` with mock payloads
   - [ ] 3.12 Configure Datadog webhooks to trigger Cloud Functions
   - [ ] 3.13 Create Datadog monitors with webhook triggers (token velocity, loop similarity, cost threshold)
   - [ ] 3.14 Test end-to-end flow: Run Poison Prompt → Datadog detects → Webhook fires → Antidote executes
 
+
 - [ ] 4.0 **Phase 4: Kafka Event Streaming & Audit Trail (Hours 121-144)**
-  - [ ] 4.1 Implement Kafka producer for agent thought events in FinBot
-  - [ ] 4.2 Integrate thought event logging into agent execution flow (non-blocking async)
-  - [ ] 4.3 Implement Kafka producer for remediation events in Cloud Functions
-  - [ ] 4.4 Log remediation actions (timestamp, agent_id, failure_type, success, cost_saved)
+  - [x] 4.1 Implement Kafka producer for agent thought events in FinBot
+  - [x] 4.2 Integrate thought event logging into agent execution flow (non-blocking async)
+  - [x] 4.3 Implement Kafka producer for remediation events in Cloud Functions
+  - [x] 4.4 Log remediation actions (timestamp, agent_id, failure_type, success, cost_saved)
   - [ ] 4.5 Create Kafka consumer for audit trail processing
   - [ ] 4.6 Implement event replay functionality for forensic analysis
   - [ ] 4.7 Set up Kafka retention policies (7 days for thought stream)

@@ -15,6 +15,9 @@ KAFKA_API_SECRET = os.environ["KAFKA_API_SECRET"]
 KAFKA_TOPIC = os.environ.get(
     "KAFKA_REMEDIATION_TOPIC", "agent.remediations.v1"
 )
+KAFKA_THOUGHTS_TOPIC = os.environ.get(
+    "KAFKA_THOUGHTS_TOPIC", "agent.thoughts.v1"
+)
 
 
 _conf = {
@@ -57,3 +60,41 @@ def publish_remediation_event(
         key=agent_id.encode("utf-8"),
     )
     _producer.flush()
+
+
+def publish_agent_thought(
+    agent_id: str,
+    session_id: str,
+    role: str,
+    input_prompt: str,
+    output_text: str,
+    token_count: int,
+    tools_used: list = None
+):
+    """
+    Emit an agent thought/step event to Kafka.
+    """
+    if tools_used is None:
+        tools_used = []
+
+    event = {
+        "agent_id": agent_id,
+        "session_id": session_id,
+        "role": role,  # e.g., "planner", "researcher", "analyst"
+        "input_prompt": input_prompt,
+        "output_text": output_text,
+        "token_count": token_count,
+        "tools_used": tools_used,
+        "timestamp": datetime.utcnow().isoformat(),
+    }
+
+    # Use session_id as key to keep conversation steps ordered in the same partition
+    _producer.produce(
+        topic=KAFKA_THOUGHTS_TOPIC,
+        value=json.dumps(event).encode("utf-8"),
+        key=session_id.encode("utf-8"),
+    )
+    # Note: We rely on standard poll() usually, but for low volume 
+    # immediate consistency in this POC, we can flush if needed, 
+    # though it hurts throughput. For now, let's rely on linger.ms=5.
+    _producer.poll(0)
