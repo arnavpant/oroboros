@@ -2,3 +2,9 @@
 venv/
 __pycache__/
 *.key
+
+# Ignore environment and secret files
+config/.env*
+config/datadog.env
+config/gcp-project.env
+config/service-accounts.md
