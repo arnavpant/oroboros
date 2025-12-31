@@ -1,0 +1,19 @@
+# --- Core AI & Google Cloud ---
+google-cloud-aiplatform>=1.40.0  # UPDATED: PRD specifies 1.40+
+vertexai
+google-cloud-secret-manager      # NEW: Required for managing API keys securely
+
+# --- Observability & Tracing ---
+ddtrace>=2.0.0
+
+# --- Data & Math (Critical for Loop Detection) ---
+numpy                            # NEW: Required for calculating cosine similarity vectors
+pandas
+
+# --- Event Streaming (Coming in Phase 4) ---
+confluent-kafka>=2.3.0           # NEW: Required for "Agent Thought" event logging
+
+# --- Utilities ---
+python-dotenv>=1.0.0
+importlib-metadata>=6.0.0        # NEW: Fixes your specific Python 3.9 "packages_distributions" error
+pytest                           # NEW: Required for running the test suite

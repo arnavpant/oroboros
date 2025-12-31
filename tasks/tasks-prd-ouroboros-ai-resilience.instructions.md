@@ -182,22 +182,22 @@ applyTo: "**"
   - [x] 1.1 Create Google Cloud Project and enable billing
   - [x] 1.2 Enable required GCP APIs (Vertex AI, Cloud Functions, Secret Manager, Cloud Build)
   - [x] 1.3 Create service accounts with appropriate IAM roles
-  - [ ] 1.4 Set up Datadog organization and obtain API/App keys
-  - [ ] 1.5 Configure Datadog-GCP integration for metric collection
+  - [x] 1.4 Set up Datadog organization and obtain API/App keys
+  - [x] 1.5 Configure Datadog-GCP integration for metric collection
   - [ ] 1.6 Set up Confluent Cloud Kafka cluster (free tier)
   - [ ] 1.7 Create Kafka topics: `agent.thoughts.v1` and `agent.remediations.v1`
   - [ ] 1.8 Define Avro schemas for Kafka topics in Schema Registry
-  - [ ] 1.9 Create project directory structure and initialize Git repository
-  - [ ] 1.10 Set up environment variables and configuration files
-  - [ ] 1.11 Install Python dependencies and verify local development environment
+  - [x] 1.9 Create project directory structure and initialize Git repository
+  - [x] 1.10 Set up environment variables and configuration files
+  - [x] 1.11 Install Python dependencies and verify local development environment
   - [ ] 1.12 Write infrastructure-as-code (Terraform) for reproducible deployment
 
 - [ ] 2.0 **Phase 2: FinBot Test Agent Development & Observability Integration (Hours 49-96)**
-  - [ ] 2.1 Design FinBot agent architecture (Planner, Researcher, Analyst pattern)
-  - [ ] 2.2 Implement FinBot agent using Vertex AI Agent Builder Python SDK
-  - [ ] 2.3 Create custom tools for FinBot (market data query, portfolio analysis)
-  - [ ] 2.4 Write system instructions for each agent role
-  - [ ] 2.5 Develop the "Poison Prompt" that triggers circular dependencies
+  - [X] 2.1 Design FinBot agent architecture (Planner, Researcher, Analyst pattern)
+  - [X] 2.2 Implement FinBot agent using Vertex AI Agent Builder Python SDK
+  - [x] 2.3 Create custom tools for FinBot (market data query, portfolio analysis)
+  - [x] 2.4 Write system instructions for each agent role
+  - [x] 2.5 Develop the "Poison Prompt" that triggers circular dependencies
   - [ ] 2.6 Integrate Datadog LLM Observability SDK (`ddtrace`) into agent code
   - [ ] 2.7 Configure trace capture for all agent interactions (input, output, tokens, latency)
   - [ ] 2.8 Add custom trace tags: `agent_id`, `session_id`, `user_query`
