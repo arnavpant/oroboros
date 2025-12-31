@@ -45,7 +45,9 @@ applyTo: "**"
 - `infrastructure/terraform/outputs.tf` - Terraform outputs (service URLs, topic names, etc.)
 - `infrastructure/gcp/enable-apis.sh` - Script to enable required GCP APIs
 - `infrastructure/gcp/service-accounts.sh` - Script to create and configure service accounts
+- `infrastructure/gcp/datadog-integration.sh` - Script to setup Datadog GCP integration
 - `config/.env.example` - Environment variables template
+- `config/.env` - Local environment variables (gitignored)
 - `config/datadog.yaml` - Datadog agent configuration
 - `config/kafka-topics.json` - Kafka topic definitions and schemas
 
@@ -182,8 +184,8 @@ applyTo: "**"
   - [x] 1.1 Create Google Cloud Project and enable billing
   - [x] 1.2 Enable required GCP APIs (Vertex AI, Cloud Functions, Secret Manager, Cloud Build)
   - [x] 1.3 Create service accounts with appropriate IAM roles
-  - [ ] 1.4 Set up Datadog organization and obtain API/App keys
-  - [ ] 1.5 Configure Datadog-GCP integration for metric collection
+  - [x] 1.4 Set up Datadog organization and obtain API/App keys
+  - [x] 1.5 Configure Datadog-GCP integration for metric collection
   - [ ] 1.6 Set up Confluent Cloud Kafka cluster (free tier)
   - [ ] 1.7 Create Kafka topics: `agent.thoughts.v1` and `agent.remediations.v1`
   - [ ] 1.8 Define Avro schemas for Kafka topics in Schema Registry
